@@ -13417,7 +13417,7 @@ async function publishScreen() {
 	}
 
 	var constraints = {
-		audio: session.audio && {
+		audio: !session.noaudio && {
 			echoCancellation: false,
 			autoGainControl: false,
 			noiseSuppression: false
@@ -13496,7 +13496,7 @@ async function publishScreen() {
 		saveSettings();
 	} catch (e){warnlog(e);}
 
-	return await publishScreen2(constraints, audioSelect, session.audio, overrideFramerate).then((res) => {
+	return await publishScreen2(constraints, audioSelect, !session.noaudio, overrideFramerate).then((res) => {
 		if (res == false) {
 			return;
 		} // no screen selected
@@ -20085,7 +20085,7 @@ async function toggleScreenShare(reload = false) { /// &sstype=1
 	}
 
 	if (reload) { // quality = 0, audio = true, videoOnEnd = false) {
-		await grabScreen(quality, session.audio, true).then(res => {  
+		await grabScreen(quality, !session.noaudio, true).then(res => {  
 			if (res != false) {
 				session.screenShareState = true;
 				pokeIframeAPI('screen-share-state', session.screenShareState, null, session.streamID);
@@ -20100,7 +20100,7 @@ async function toggleScreenShare(reload = false) { /// &sstype=1
 		return;
 	}
 	if (session.screenShareState == false) { // adding a screen
-		await grabScreen(quality, session.audio, true).then(res => {
+		await grabScreen(quality, !session.noaudio, true).then(res => {
 			if (res != false) {
 				session.screenShareState = true;
 				pokeIframeAPI('screen-share-state', session.screenShareState, null, session.streamID);
