@@ -20085,7 +20085,7 @@ async function toggleScreenShare(reload = false) { /// &sstype=1
 	}
 
 	if (reload) { // quality = 0, audio = true, videoOnEnd = false) {
-		await grabScreen(quality, true, true).then(res => {  
+		await grabScreen(quality, session.audio, true).then(res => {  
 			if (res != false) {
 				session.screenShareState = true;
 				pokeIframeAPI('screen-share-state', session.screenShareState, null, session.streamID);
@@ -20100,7 +20100,7 @@ async function toggleScreenShare(reload = false) { /// &sstype=1
 		return;
 	}
 	if (session.screenShareState == false) { // adding a screen
-		await grabScreen(quality, true, true).then(res => {
+		await grabScreen(quality, session.audio, true).then(res => {
 			if (res != false) {
 				session.screenShareState = true;
 				pokeIframeAPI('screen-share-state', session.screenShareState, null, session.streamID);
