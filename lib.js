@@ -13417,7 +13417,7 @@ async function publishScreen() {
 	}
 
 	var constraints = {
-		audio: {
+		audio: sesion.audio && {
 			echoCancellation: false,
 			autoGainControl: false,
 			noiseSuppression: false
