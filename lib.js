@@ -13496,7 +13496,7 @@ async function publishScreen() {
 		saveSettings();
 	} catch (e){warnlog(e);}
 
-	return await publishScreen2(constraints, audioSelect, true, overrideFramerate).then((res) => {
+	return await publishScreen2(constraints, audioSelect, session.audio, overrideFramerate).then((res) => {
 		if (res == false) {
 			return;
 		} // no screen selected
